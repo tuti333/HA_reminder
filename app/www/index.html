@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Przypomnienia</title>
   <style>
-    body {
-      font-family: sans-serif;
-      padding: 20px;
-    }
-    button {
-      font-size: 18px;
-      padding: 10px 20px;
-    }
+    button { margin-left: 6px; }
   </style>
 </head>
 <body>
-  <h1>Reminder Add-on</h1>
-  <p>Jeśli to widzisz — Ingress działa 🎉</p>
-  <button onclick="test()">Kliknij</button>
 
-  <script>
-    function test() {
-      alert("Frontend działa");
-    }
-  </script>
+<h1>Przypomnienia</h1>
+
+<form id="form">
+  <input type="hidden" id="id">
+  <input id="name" placeholder="Nazwa" required>
+  <input id="time" type="time" required>
+  <input id="dose" type="number" min="1" value="1">
+  <button type="submit">Zapisz</button>
+  <button type="button" onclick="resetForm()">Anuluj</button>
+</form>
+
+<ul id="list"></ul>
+
+<script src="/static/app.js"></script>
 </body>
 </html>
-
