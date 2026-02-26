@@ -20,6 +20,7 @@ form.addEventListener("submit", async (e) => {
 
   const id = document.getElementById("id").value;
   const data = {
+    person: document.getElementById("userSelect").value || "",
     name: document.getElementById("name").value,
     time: document.getElementById("time").value,
     dose: parseInt(document.getElementById("dose").value)
@@ -55,7 +56,7 @@ async function load() {
   list.innerHTML = "";
   data.forEach(r => {
     const li = document.createElement("li");
-    li.textContent = `${r.name} – ${r.time} (${r.dose})`;
+    li.textContent = `${r.person} ${r.name} – ${r.time} (${r.dose})`;
 
     const edit = document.createElement("button");
     edit.textContent = "Edytuj";
@@ -64,6 +65,7 @@ async function load() {
       document.getElementById("name").value = r.name;
       document.getElementById("time").value = r.time;
       document.getElementById("dose").value = r.dose;
+      document.getElementById("userSelect").value = r.person;
     };
 
     const del = document.createElement("button");
