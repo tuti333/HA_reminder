@@ -1,7 +1,7 @@
-name: "Hello world"
-description: "My first real app!"
+name: "Reminder"
+description: "Custom reminder service"
 version: "1.0.0"
-slug: "hello_world"
+slug: "reminder"
 init: false
 ingress: true
 ingress_port: 8080

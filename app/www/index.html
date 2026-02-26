@@ -37,11 +37,13 @@
 <form id="form">
   <input type="hidden" id="id">
   <input id="name" placeholder="Nazwa" required>
-  <select id="time" class="form-control mb-3">
-    <option value="1">Rano</option>
-    <option value="2">Popołudnie</option>
-    <option value="3">Wieczorem</option>
-  </select>
+  <!-- multiple choice using checkboxes, easier for mobile/keyboard -->
+  <fieldset id="time" class="mb-3">
+    <legend>Godziny</legend>
+    <label><input type="checkbox" value="1"> Rano</label><br>
+    <label><input type="checkbox" value="2"> Popołudnie</label><br>
+    <label><input type="checkbox" value="3"> Wieczorem</label>
+  </fieldset>
   <input id="dose" type="number" min="1" value="1">
   <select id="frequency" class="form-control mb-3">
     <option value="1">Co 2 dzień</option>

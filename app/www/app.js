@@ -19,10 +19,13 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const id = document.getElementById("id").value;
+  // collect checkbox selections
+  const timeFieldset = document.getElementById("time");
+  const times = Array.from(timeFieldset.querySelectorAll("input[type=checkbox]:checked")).map(i => i.value);
   const data = {
     person: document.getElementById("userSelect").value || "",
     name: document.getElementById("name").value,
-    time: document.getElementById("time").value,
+    time: times,
     dose: parseInt(document.getElementById("dose").value)
   };
 
@@ -56,14 +59,21 @@ async function load() {
   list.innerHTML = "";
   data.forEach(r => {
     const li = document.createElement("li");
-    li.textContent = `${r.person} ${r.name} – ${r.time} (${r.dose})`;
+    li.textContent = `${r.person} ${r.name} – ${Array.isArray(r.time)?r.time.join(','):r.time} (${r.dose})`;
 
     const edit = document.createElement("button");
     edit.textContent = "Edytuj";
     edit.onclick = () => {
       document.getElementById("id").value = r.id;
       document.getElementById("name").value = r.name;
-      document.getElementById("time").value = r.time;
+      const timeFieldset = document.getElementById("time");
+      Array.from(timeFieldset.querySelectorAll("input[type=checkbox]")).forEach(cb => cb.checked = false);
+      if (Array.isArray(r.time)) {
+        r.time.forEach(val => {
+          const cb = timeFieldset.querySelector(`input[type=checkbox][value="${val}"]`);
+          if (cb) cb.checked = true;
+        });
+      }
       document.getElementById("dose").value = r.dose;
       document.getElementById("userSelect").value = r.person;
     };

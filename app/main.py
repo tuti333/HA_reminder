@@ -3,9 +3,22 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
+from typing import List, Union
 
 app = FastAPI()
+
+# middleware will collapse repeated slashes so that "/foo//bar" and "/foo/bar"
+# are treated identically; allows ingress to send a double-slash prefix without
+# requiring every route to redeclare it.
+import re
+from starlette.requests import Request
+
+@app.middleware("http")
+async def normalize_path(request: Request, call_next):
+    # modify the scope path in-place before routing
+    request.scope["path"] = re.sub(r"/{2,}", "/", request.scope["path"])
+    return await call_next(request)
 
 www_path = Path(__file__).parent / "www"
 
@@ -13,7 +26,6 @@ www_path = Path(__file__).parent / "www"
 app.mount("/static", StaticFiles(directory=www_path), name="static")
 
 @app.get("/", response_class=HTMLResponse)
-@app.get("//", response_class=HTMLResponse)
 def index():
     return (www_path / "index.html").read_text(encoding="utf-8")
 
@@ -22,8 +34,30 @@ class ReminderIn(BaseModel):
     # allow missing/blank person from the UI and provide a safe default
     person: str = ""
     name: str
-    time: str
-    dose: int
+    # time periods may be multiple values
+    time: List[Union[int,str]]
+    dose: int = 1
+
+    @field_validator("time", mode="before")
+    def _coerce_time(cls, v):
+        if v is None:
+            return []
+        if isinstance(v, (str, int)):
+            return [str(v)]
+        if isinstance(v, list):
+            return [str(x) for x in v]
+        raise ValueError("invalid time value")
+
+    @field_validator("dose", mode="before")
+    def _coerce_dose(cls, v):
+        if v is None or (isinstance(v, str) and v.strip() == ""):
+            return 1
+        if isinstance(v, str):
+            try:
+                return int(v)
+            except Exception:
+                raise ValueError("dose must be an integer")
+        return v
 
 class Reminder(ReminderIn):
     id: str
@@ -48,7 +82,15 @@ def load_reminders() -> None:
     if REMINDERS_FILE.exists():
         try:
             raw = json.loads(REMINDERS_FILE.read_text(encoding="utf-8"))
-            reminders = [Reminder(**item) for item in raw]
+            # migrate old entries
+            cleaned = []
+            for item in raw:
+                if "person" not in item:
+                    item["person"] = ""
+                if "time" in item and not isinstance(item["time"], list):
+                    item["time"] = [str(item["time"]) ]
+                cleaned.append(item)
+            reminders = [Reminder(**item) for item in cleaned]
         except Exception as exc:
             # not fatal; keep empty list and print error for debugging
             print(f"failed to load reminders: {exc}")
