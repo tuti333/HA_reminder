@@ -43,12 +43,137 @@
                 <th colspan="2" class="text-center h4">Leki na dziś</th>
             </tr>
             <tr>
-                <th class="bg-info text-white">Użytkownik 1</th>
-                <th class="bg-info text-white">Użytkownik 2</th>
+                <th class="bg-info text-white">Magda</th>
+                <th class="bg-info text-white">Mateusz</th>
             </tr>
         </thead>
         <tbody id="usersTable">
-            <!-- Dynamiczne wiersze: rano, popołudnie, wieczór -->
+            <!-- STAŁY wiersz 1: Rano -->
+            <tr class="table-warning">
+                <td colspan="2" class="text-center fw-bold fs-5 bg-gradient p-2">
+                    <i class="bi bi-sunrise-fill me-2"></i> Rano (6:00-12:59)
+                </td>
+            </tr>
+            <tr>
+                <td class="p-3 align-middle" style="vertical-align: top;">
+                    <!-- Leki Mamy rano - JS wypełni -->
+                    <div class="lek-card mb-2 p-3 border rounded bg-light" data-user="1" data-period="rano" id="Magda-rano">
+                      <ul class="list-unstyled mb-0">
+                        <li class="mb-2 p-2 border-bottom"><strong>Witamina D</strong></li>
+                        <li class="mb-2 p-2 border-bottom"><strong>Omega 3</strong></li>
+                        <li class="p-2"><strong>Magnez</strong></li>
+                      </ul>
+                    </div>
+                    <div class="d-flex gap-2 justify-content-center pt-3 border-top">
+                      <button class="btn btn-success btn-lg w-50" onclick="markAllTaken('Magda', 'rano')">
+                        <i class="bi bi-check-lg"></i> Wzięte
+                      </button>
+                      <button class="btn btn-secondary btn-lg w-50" onclick="skipAll('Magda', 'rano')">
+                        <i class="bi bi-x-lg"></i> Pominięte
+                      </button>
+                    </div>
+                </td>
+                <td class="p-3 align-middle" style="vertical-align: top;">
+                    <!-- Leki Taty rano -->
+                    <div class="lek-card mb-2 p-3 border rounded bg-light" data-user="2" data-period="rano" id="Mateusz-rano">
+                        <ul class="list-unstyled mb-0">
+                        <li class="mb-2 p-2 border-bottom"><strong>Witamina D</strong></li>
+                        <li class="mb-2 p-2 border-bottom"><strong>Omega 3</strong></li>
+                        <li class="p-2"><strong>Magnez</strong></li>
+                      </ul>
+                    </div>
+                    <div class="d-flex gap-2 justify-content-center pt-3 border-top">
+                      <button class="btn btn-success btn-lg w-50" onclick="markAllTaken('Magda', 'rano')">
+                        <i class="bi bi-check-lg"></i> Wzięte
+                      </button>
+                      <button class="btn btn-secondary btn-lg w-50" onclick="skipAll('Magda', 'rano')">
+                        <i class="bi bi-x-lg"></i> Pominięte
+                      </button>
+                    </div>
+                </td>
+            </tr>
+
+            <!-- STAŁY wiersz 2: Popołudnie -->
+            <tr class="table-warning">
+                <td colspan="2" class="text-center fw-bold fs-5 bg-gradient p-2">
+                    <i class="bi bi-sun-fill me-2"></i> Popołudnie (13:00-18:59)
+                </td>
+            </tr>
+            <tr>
+                <td class="p-3 align-middle" style="vertical-align: top;">
+                    <div class="lek-card mb-2 p-3 border rounded bg-light" data-user="1" data-period="popołudnie" id="Magda-pop">
+                        <ul class="list-unstyled mb-0">
+                        <li class="mb-2 p-2 border-bottom"><strong>Witamina D</strong></li>
+                        <li class="mb-2 p-2 border-bottom"><strong>Omega 3</strong></li>
+                        <li class="p-2"><strong>Magnez</strong></li>
+                    </div>
+                    <div class="d-flex gap-2 justify-content-center pt-3 border-top">
+                      <button class="btn btn-success btn-lg w-50" onclick="markAllTaken('Magda', 'rano')">
+                        <i class="bi bi-check-lg"></i> Wzięte
+                      </button>
+                      <button class="btn btn-secondary btn-lg w-50" onclick="skipAll('Magda', 'rano')">
+                        <i class="bi bi-x-lg"></i> Pominięte
+                      </button>
+                    </div>
+                </td>
+                <td class="p-3 align-middle" style="vertical-align: top;">
+                    <div class="lek-card mb-2 p-3 border rounded bg-light" data-user="2" data-period="popołudnie" id="Mateusz-pop">
+                        <ul class="list-unstyled mb-0">
+                        <li class="mb-2 p-2 border-bottom"><strong>Witamina D</strong></li>
+                        <li class="mb-2 p-2 border-bottom"><strong>Omega 3</strong></li>
+                        <li class="p-2"><strong>Magnez</strong></li>
+                    </div>
+                    <div class="d-flex gap-2 justify-content-center pt-3 border-top">
+                      <button class="btn btn-success btn-lg w-50" onclick="markAllTaken('Magda', 'rano')">
+                        <i class="bi bi-check-lg"></i> Wzięte
+                      </button>
+                      <button class="btn btn-secondary btn-lg w-50" onclick="skipAll('Magda', 'rano')">
+                        <i class="bi bi-x-lg"></i> Pominięte
+                      </button>
+                    </div>
+                </td>
+            </tr>
+
+            <!-- STAŁY wiersz 3: Wieczór -->
+            <tr class="table-warning">
+                <td colspan="2" class="text-center fw-bold fs-5 bg-gradient p-2">
+                    <i class="bi bi-moon-stars-fill me-2"></i> Wieczór (19:00-05:59)
+                </td>
+            </tr>
+            <tr>
+                <td class="p-3 align-middle" style="vertical-align: top;">
+                    <div class="lek-card mb-2 p-3 border rounded bg-light" data-user="1" data-period="wieczór" id="Magda-wieczór">
+                        <ul class="list-unstyled mb-0">
+                        <li class="mb-2 p-2 border-bottom"><strong>Witamina D</strong></li>
+                        <li class="mb-2 p-2 border-bottom"><strong>Omega 3</strong></li>
+                        <li class="p-2"><strong>Magnez</strong></li>
+                    </div>
+                    <div class="d-flex gap-2 justify-content-center pt-3 border-top">
+                      <button class="btn btn-success btn-lg w-50" onclick="markAllTaken('Magda', 'rano')">
+                        <i class="bi bi-check-lg"></i> Wzięte
+                      </button>
+                      <button class="btn btn-secondary btn-lg w-50" onclick="skipAll('Magda', 'rano')">
+                        <i class="bi bi-x-lg"></i> Pominięte
+                      </button>
+                    </div>
+                </td>
+                <td class="p-3 align-middle" style="vertical-align: top;">
+                    <div class="lek-card mb-2 p-3 border rounded bg-light" data-user="2" data-period="wieczór" id="Mateusz-wieczór">
+                        <ul class="list-unstyled mb-0">
+                        <li class="mb-2 p-2 border-bottom"><strong>Witamina D</strong></li>
+                        <li class="mb-2 p-2 border-bottom"><strong>Omega 3</strong></li>
+                        <li class="mb-2 p-2 border-bottom"><strong>Selen</strong></li>
+                    </div>
+                    <div class="d-flex gap-2 justify-content-center pt-3 border-top">
+                      <button class="btn btn-success btn-lg w-50" onclick="markAllTaken('Magda', 'rano')">
+                        <i class="bi bi-check-lg"></i> Wzięte
+                      </button>
+                      <button class="btn btn-secondary btn-lg w-50" onclick="skipAll('Magda', 'rano')">
+                        <i class="bi bi-x-lg"></i> Pominięte
+                      </button>
+                    </div>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>
