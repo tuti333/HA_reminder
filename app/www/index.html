@@ -9,18 +9,49 @@
 </head>
 <body>
 
-<h1>Przypomnienia</h1>
+<h1>Konfiguruj przyjmowane leki</h1>
 
 <form id="form">
   <input type="hidden" id="id">
   <input id="name" placeholder="Nazwa" required>
   <input id="time" type="time" required>
   <input id="dose" type="number" min="1" value="1">
+  <select id="frequency" class="form-control mb-3">
+    <option value="1">Co 2 dzień</option>
+    <option value="1">Raz dziennie</option>
+    <option value="3">Co 8h</option>
+    <option value="4">Co 6h</option>
+  </select>
+  <select id="userSelect" class="form-select" required>
+      <option value="">Użytkownik</option>
+      <option value="1">Magda</option>
+      <option value="2">Mateusz</option>
+  </select>
   <button type="submit">Zapisz</button>
   <button type="button" onclick="resetForm()">Anuluj</button>
 </form>
 
 <ul id="list"></ul>
+
+<h1>Twój terminarz brania leków</h1>
+<h3>Data: <span id="todayDate"></span></h3>
+
+<div class="table-responsive mt-4">
+    <table class="table table-bordered table-striped shadow-lg border-primary" style="border: 3px solid #000000;">
+        <thead class="table-dark">
+            <tr>
+                <th colspan="2" class="text-center h4">Leki na dziś</th>
+            </tr>
+            <tr>
+                <th class="bg-info text-white">Użytkownik 1</th>
+                <th class="bg-info text-white">Użytkownik 2</th>
+            </tr>
+        </thead>
+        <tbody id="usersTable">
+            <!-- Dynamiczne wiersze: rano, popołudnie, wieczór -->
+        </tbody>
+    </table>
+</div>
 
 <script src="/static/app.js"></script>
 </body>
