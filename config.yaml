@@ -4,7 +4,7 @@ version: "1.0.0"
 slug: "hello_world"
 init: false
 ingress: true
-ingress_ports: 8080
+ingress_port: 8080
 panel_icon: "mdi:alarm"
 panel_title: "Przypomnienia"
 arch:
@@ -13,5 +13,4 @@ arch:
   - armhf
   - armv7
   - i386
-ports:
-  8080/tcp: null
+
