@@ -38,18 +38,15 @@
   <input type="hidden" id="id">
   <input id="name" placeholder="Nazwa" required>
   <!-- multiple choice using checkboxes, easier for mobile/keyboard -->
-  <fieldset id="time" class="mb-3">
-    <legend>Godziny</legend>
-    <label><input type="checkbox" value="1"> Rano</label><br>
-    <label><input type="checkbox" value="2"> Popołudnie</label><br>
+    <label><input type="checkbox" value="1"> Rano</label>
+    <label><input type="checkbox" value="2"> Popołudnie</label>
     <label><input type="checkbox" value="3"> Wieczorem</label>
-  </fieldset>
   <input id="dose" type="number" min="1" value="1">
-  <select id="frequency" class="form-control mb-3">
+  <select id="frequency">
     <option value="1">Co 2 dzień</option>
     <option value="2">Raz dziennie</option>
   </select>
-  <select id="userSelect" class="form-select" required>
+  <select id="userSelect" required>
       <option value="Magda">Magda</option>
       <option value="Mateusz">Mateusz</option>
   </select>
@@ -67,51 +64,51 @@
 <table>
   <thead>
     <tr>
-        <th colspan="2" class="text-center h4">Leki na dziś</th>
+        <th colspan="2">Leki na dziś</th>
     </tr>
     <tr>
-        <th class="bg-info text-white">Magda</th>
-        <th class="bg-info text-white">Mateusz</th>
+        <th>Magda</th>
+        <th>Mateusz</th>
     </tr>
   </thead>
   <tbody id="usersTable">
     <!-- STAŁY wiersz 1: Rano -->
     <tr>
-        <td colspan="2" class="text-center fw-bold fs-5 bg-gradient p-2">
+        <td colspan="2">
             <i class="bi bi-sunrise-fill me-2"></i> Rano (6:00-12:59)
         </td>
     </tr>
     <tr>
         <td style="vertical-align: top;">
-            <div class="lek-card mb-2 p-3 border rounded bg-light" data-user="1" data-period="rano" id="Magda-rano">
-              <ul class="list-unstyled mb-0">
-                <li class="mb-2 p-2 border-bottom"><strong>Witamina D</strong></li>
-                <li class="mb-2 p-2 border-bottom"><strong>Omega 3</strong></li>
-                <li class="p-2"><strong>Magnez</strong></li>
+            <div data-user="1" data-period="rano" id="Magda-rano">
+              <ul>
+                <li><strong>Witamina D</strong></li>
+                <li><strong>Omega 3</strong></li>
+                <li><strong>Magnez</strong></li>
               </ul>
             </div>
-            <div class="d-flex gap-2 justify-content-center pt-3 border-top">
-              <button class="btn btn-success btn-lg w-50" onclick="markAllTaken('Magda', 'rano')">
+            <div>
+              <button onclick="markAllTaken('Magda', 'rano')">
                 <i class="bi bi-check-lg"></i> Wzięte
               </button>
-              <button class="btn btn-secondary btn-lg w-50" onclick="skipAll('Magda', 'rano')">
+              <button onclick="skipAll('Magda', 'rano')">
                 <i class="bi bi-x-lg"></i> Pominięte
               </button>
             </div>
         </td>
         <td style="vertical-align: top;">
-            <div class="lek-card mb-2 p-3 border rounded bg-light" data-user="2" data-period="rano" id="Mateusz-rano">
-              <ul class="list-unstyled mb-0">
-                <li class="mb-2 p-2 border-bottom"><strong>Witamina D</strong></li>
-                <li class="mb-2 p-2 border-bottom"><strong>Omega 3</strong></li>
-                <li class="p-2"><strong>Magnez</strong></li>
+            <div data-user="2" data-period="rano" id="Mateusz-rano">
+              <ul>
+                <li><strong>Witamina D</strong></li>
+                <li><strong>Omega 3</strong></li>
+                <li><strong>Magnez</strong></li>
               </ul>
             </div>
-            <div class="d-flex gap-2 justify-content-center pt-3 border-top">
-              <button class="btn btn-success btn-lg w-50" onclick="markAllTaken('Mateusz', 'rano')">
+            <div>
+              <button onclick="markAllTaken('Mateusz', 'rano')">
                 <i class="bi bi-check-lg"></i> Wzięte
               </button>
-              <button class="btn btn-secondary btn-lg w-50" onclick="skipAll('Mateusz', 'rano')">
+              <button onclick="skipAll('Mateusz', 'rano')">
                 <i class="bi bi-x-lg"></i> Pominięte
               </button>
             </div>
@@ -120,41 +117,41 @@
 
     <!-- STAŁY wiersz 2: Popołudnie -->
     <tr>
-        <td colspan="2" class="text-center fw-bold fs-5 bg-gradient p-2">
+        <td colspan="2">
             <i class="bi bi-sun-fill me-2"></i> Popołudnie (13:00-18:59)
         </td>
     </tr>
     <tr>
-        <td class="p-3 align-middle" style="vertical-align: top;">
-            <div class="lek-card mb-2 p-3 border rounded bg-light" data-user="1" data-period="popołudnie" id="Magda-pop">
-              <ul class="list-unstyled mb-0">
-                <li class="mb-2 p-2 border-bottom"><strong>Witamina D</strong></li>
-                <li class="mb-2 p-2 border-bottom"><strong>Omega 3</strong></li>
-                <li class="p-2"><strong>Magnez</strong></li>
+        <td style="vertical-align: top;">
+            <div data-user="1" data-period="popołudnie" id="Magda-pop">
+              <ul>
+                <li><strong>Witamina D</strong></li>
+                <li><strong>Omega 3</strong></li>
+                <li><strong>Magnez</strong></li>
               </ul>
             </div>
-            <div class="d-flex gap-2 justify-content-center pt-3 border-top">
-              <button class="btn btn-success btn-lg w-50" onclick="markAllTaken('Magda', 'popołudnie')">
+            <div>
+              <button onclick="markAllTaken('Magda', 'popołudnie')">
                 <i class="bi bi-check-lg"></i> Wzięte
               </button>
-              <button class="btn btn-secondary btn-lg w-50" onclick="skipAll('Magda', 'popołudnie')">
+              <button onclick="skipAll('Magda', 'popołudnie')">
                 <i class="bi bi-x-lg"></i> Pominięte
               </button>
             </div>
         </td>
-        <td class="p-3 align-middle" style="vertical-align: top;">
-            <div class="lek-card mb-2 p-3 border rounded bg-light" data-user="2" data-period="popołudnie" id="Mateusz-pop">
-              <ul class="list-unstyled mb-0">
-                <li class="mb-2 p-2 border-bottom"><strong>Witamina D</strong></li>
-                <li class="mb-2 p-2 border-bottom"><strong>Omega 3</strong></li>
-                <li class="p-2"><strong>Magnez</strong></li>
+        <td style="vertical-align: top;">
+            <div data-user="2" data-period="popołudnie" id="Mateusz-pop">
+              <ul>
+                <li><strong>Witamina D</strong></li>
+                <li><strong>Omega 3</strong></li>
+                <li><strong>Magnez</strong></li>
               </ul>
             </div>
-            <div class="d-flex gap-2 justify-content-center pt-3 border-top">
-              <button class="btn btn-success btn-lg w-50" onclick="markAllTaken('Mateusz', 'popołudnie')">
+            <div>
+              <button onclick="markAllTaken('Mateusz', 'popołudnie')">
                 <i class="bi bi-check-lg"></i> Wzięte
               </button>
-              <button class="btn btn-secondary btn-lg w-50" onclick="skipAll('Mateusz', 'popołudnie')">
+              <button onclick="skipAll('Mateusz', 'popołudnie')">
                 <i class="bi bi-x-lg"></i> Pominięte
               </button>
             </div>
@@ -163,39 +160,41 @@
 
     <!-- STAŁY wiersz 3: Wieczór -->
     <tr>
-        <td colspan="2" class="text-center fw-bold fs-5 bg-gradient p-2">
+        <td colspan="2">
             <i class="bi bi-moon-stars-fill me-2"></i> Wieczór (19:00-05:59)
         </td>
     </tr>
     <tr>
-        <td class="p-3 align-middle" style="vertical-align: top;">
-            <div class="lek-card mb-2 p-3 border rounded bg-light" data-user="1" data-period="wieczór" id="Magda-wieczór">
-                <ul class="list-unstyled mb-0">
-                <li class="mb-2 p-2 border-bottom"><strong>Witamina D</strong></li>
-                <li class="mb-2 p-2 border-bottom"><strong>Omega 3</strong></li>
-                <li class="p-2"><strong>Magnez</strong></li>
+        <td style="vertical-align: top;">
+            <div data-user="1" data-period="wieczór" id="Magda-wieczór">
+                <ul>
+                <li><strong>Witamina D</strong></li>
+                <li><strong>Omega 3</strong></li>
+                <li><strong>Magnez</strong></li>
+                </ul>
             </div>
-            <div class="d-flex gap-2 justify-content-center pt-3 border-top">
-              <button class="btn btn-success btn-lg w-50" onclick="markAllTaken('Magda', 'wieczór')">
+            <div>
+              <button onclick="markAllTaken('Magda', 'wieczór')">
                 <i class="bi bi-check-lg"></i> Wzięte
               </button>
-              <button class="btn btn-secondary btn-lg w-50" onclick="skipAll('Magda', 'wieczór')">
+              <button onclick="skipAll('Magda', 'wieczór')">
                 <i class="bi bi-x-lg"></i> Pominięte
               </button>
             </div>
         </td>
-        <td class="p-3 align-middle" style="vertical-align: top;">
-            <div class="lek-card mb-2 p-3 border rounded bg-light" data-user="2" data-period="wieczór" id="Mateusz-wieczór">
-                <ul class="list-unstyled mb-0">
-                <li class="mb-2 p-2 border-bottom"><strong>Witamina D</strong></li>
-                <li class="mb-2 p-2 border-bottom"><strong>Omega 3</strong></li>
-                <li class="mb-2 p-2 border-bottom"><strong>Selen</strong></li>
+        <td style="vertical-align: top;">
+            <div data-user="2" data-period="wieczór" id="Mateusz-wieczór">
+                <ul>
+                <li><strong>Witamina D</strong></li>
+                <li><strong>Omega 3</strong></li>
+                <li><strong>Selen</strong></li>
+                </ul>
             </div>
-            <div class="d-flex gap-2 justify-content-center pt-3 border-top">
-              <button class="btn btn-success btn-lg w-50" onclick="markAllTaken('Mateusz', 'wieczór')">
+            <div>
+              <button onclick="markAllTaken('Mateusz', 'wieczór')">
                 <i class="bi bi-check-lg"></i> Wzięte
               </button>
-              <button class="btn btn-secondary btn-lg w-50" onclick="skipAll('Mateusz', 'wieczór')">
+              <button onclick="skipAll('Mateusz', 'wieczór')">
                 <i class="bi bi-x-lg"></i> Pominięte
               </button>
             </div>
