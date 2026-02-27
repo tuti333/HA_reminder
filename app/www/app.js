@@ -30,13 +30,13 @@ form.addEventListener("submit", async (e) => {
   };
 
   if (id) {
-    await fetch(`/api/reminders/${id}`, {
+    await fetch(`api/reminders/${id}`, {
       method: "PUT",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(data)
     });
   } else {
-    await fetch("/api/reminders", {
+    await fetch("api/reminders", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(data)
@@ -53,7 +53,7 @@ function resetForm() {
 }
 
 async function load() {
-  const res = await fetch("/api/reminders");
+  const res = await fetch("api/reminders");
   const data = await res.json();
 
   list.innerHTML = "";
@@ -81,7 +81,7 @@ async function load() {
     const del = document.createElement("button");
     del.textContent = "Usuń";
     del.onclick = async () => {
-      await fetch(`/api/reminders/${r.id}`, { method: "DELETE" });
+      await fetch(`api/reminders/${r.id}`, { method: "DELETE" });
       load();
     };
 
