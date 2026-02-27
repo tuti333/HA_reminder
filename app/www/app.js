@@ -1,20 +1,6 @@
 const form = document.getElementById("form");
 const list = document.getElementById("list");
 
-function updateTodayDate() {
-    const today = new Date();
-    const options = { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-    };
-    const formattedDate = today.toLocaleDateString('pl-PL', options);
-    document.getElementById('todayDate').textContent = formattedDate;
-}
-
-document.addEventListener('DOMContentLoaded', updateTodayDate);
-
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 

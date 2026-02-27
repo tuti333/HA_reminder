@@ -25,9 +25,18 @@ www_path = Path(__file__).parent / "www"
 # Serwowanie plików statycznych
 app.mount("/static", StaticFiles(directory=www_path), name="static")
 
+# templates support so we can inject current time into HTML
+from fastapi.templating import Jinja2Templates
+from starlette.requests import Request
+from datetime import datetime
+
+templates = Jinja2Templates(directory=str(www_path))
+
 @app.get("/", response_class=HTMLResponse)
-def index():
-    return (www_path / "index.html").read_text(encoding="utf-8")
+def index(request: Request):
+    # use server/system time (should match Home Assistant) on each request
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return templates.TemplateResponse("index.html", {"request": request, "current_time": now})
 
 # ===== MODELE =====
 class ReminderIn(BaseModel):
