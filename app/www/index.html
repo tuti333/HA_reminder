@@ -28,6 +28,42 @@
         color: black !important;
       }
     }
+    /* keep small checkbox group inline with other controls */
+    .inline-fieldset {
+      display: inline-flex;
+      gap: 0.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      width: auto;
+      border: none;
+      padding: 0;
+      margin: 0;
+      vertical-align: middle;
+    }
+    .inline-fieldset label { margin: 0; }
+    /* compact dose control */
+    .dose { display: inline-flex; align-items: center; gap: 0.25rem; vertical-align: middle; }
+    .dose-input { width: 50px; }
+    .dose-suffix { font-size: 0.9rem; color: #333; }
+    /* make form buttons stand out from inputs */
+    form button[type="submit"] {
+      background-color: #198754;
+      color: #fff;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    form button[type="submit"]:hover { filter: brightness(0.95); }
+    form button[type="button"] {
+      background-color: #fc6464;
+      color: #fff;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    form button[type="button"]:hover { filter: brightness(0.95); }
   </style>
 </head>
 <body>
@@ -38,13 +74,18 @@
   <input type="hidden" id="id">
   <input id="name" placeholder="Nazwa" required>
   <!-- multiple choice using checkboxes, easier for mobile/keyboard -->
+  <fieldset id="time" class="inline-fieldset">
     <label><input type="checkbox" value="1"> Rano</label>
     <label><input type="checkbox" value="2"> Popołudnie</label>
     <label><input type="checkbox" value="3"> Wieczorem</label>
-  <input id="dose" type="number" min="1" value="1">
+  </fieldset>
+  <span class="dose">
+    <input id="dose" class="dose-input" type="number" min="1" value="1">
+    <span class="dose-suffix">szt</span>
+  </span>
   <select id="frequency">
-    <option value="1">Co 2 dzień</option>
-    <option value="2">Raz dziennie</option>
+    <option value="1">Raz dziennie</option>
+    <option value="2">Co 2 dzień</option>
   </select>
   <select id="userSelect" required>
       <option value="Magda">Magda</option>
@@ -81,11 +122,6 @@
     <tr>
         <td style="vertical-align: top;">
             <div data-user="1" data-period="rano" id="Magda-rano">
-              <ul>
-                <li><strong>Witamina D</strong></li>
-                <li><strong>Omega 3</strong></li>
-                <li><strong>Magnez</strong></li>
-              </ul>
             </div>
             <div>
               <button onclick="markAllTaken('Magda', 'rano')">
@@ -98,11 +134,6 @@
         </td>
         <td style="vertical-align: top;">
             <div data-user="2" data-period="rano" id="Mateusz-rano">
-              <ul>
-                <li><strong>Witamina D</strong></li>
-                <li><strong>Omega 3</strong></li>
-                <li><strong>Magnez</strong></li>
-              </ul>
             </div>
             <div>
               <button onclick="markAllTaken('Mateusz', 'rano')">
@@ -123,12 +154,7 @@
     </tr>
     <tr>
         <td style="vertical-align: top;">
-            <div data-user="1" data-period="popołudnie" id="Magda-pop">
-              <ul>
-                <li><strong>Witamina D</strong></li>
-                <li><strong>Omega 3</strong></li>
-                <li><strong>Magnez</strong></li>
-              </ul>
+            <div data-user="1" data-period="popołudnie" id="Magda-popołudnie">
             </div>
             <div>
               <button onclick="markAllTaken('Magda', 'popołudnie')">
@@ -140,12 +166,7 @@
             </div>
         </td>
         <td style="vertical-align: top;">
-            <div data-user="2" data-period="popołudnie" id="Mateusz-pop">
-              <ul>
-                <li><strong>Witamina D</strong></li>
-                <li><strong>Omega 3</strong></li>
-                <li><strong>Magnez</strong></li>
-              </ul>
+            <div data-user="2" data-period="popołudnie" id="Mateusz-popołudnie">
             </div>
             <div>
               <button onclick="markAllTaken('Mateusz', 'popołudnie')">
@@ -167,11 +188,6 @@
     <tr>
         <td style="vertical-align: top;">
             <div data-user="1" data-period="wieczór" id="Magda-wieczór">
-                <ul>
-                <li><strong>Witamina D</strong></li>
-                <li><strong>Omega 3</strong></li>
-                <li><strong>Magnez</strong></li>
-                </ul>
             </div>
             <div>
               <button onclick="markAllTaken('Magda', 'wieczór')">
@@ -184,11 +200,6 @@
         </td>
         <td style="vertical-align: top;">
             <div data-user="2" data-period="wieczór" id="Mateusz-wieczór">
-                <ul>
-                <li><strong>Witamina D</strong></li>
-                <li><strong>Omega 3</strong></li>
-                <li><strong>Selen</strong></li>
-                </ul>
             </div>
             <div>
               <button onclick="markAllTaken('Mateusz', 'wieczór')">

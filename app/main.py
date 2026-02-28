@@ -153,3 +153,42 @@ def delete_reminder(rid: str):
         raise HTTPException(404, "Not found")
     save_reminders()
     return {"status": "deleted"}
+
+
+# ===== DZIŚ / SCHEDULE =====
+from collections import defaultdict
+
+PERIOD_MAP = {"1": "rano", "2": "popołudnie", "3": "wieczór"}
+
+
+@app.get("/api/today")
+def today_schedule():
+    """Return reminders arranged for the current day grouped by person and period.
+
+    Behavior:
+    - period values `1`, `2`, `3` map to `rano`, `popołudnie`, `wieczór`.
+    - reminders with an empty `time` list are shown in all three periods.
+    - unknown time values are grouped under `unspecified`.
+    """
+    now = datetime.now()
+    schedule: dict = {}
+
+    # ensure every known person has an entry
+    for r in reminders:
+        schedule.setdefault(r.person, {"rano": [], "popołudnie": [], "wieczór": [], "unspecified": []})
+
+    for r in reminders:
+        times = r.time or []
+        if not times:
+            # treat unspecified time as applicable to all periods
+            for label in ("rano", "popołudnie", "wieczór"):
+                schedule.setdefault(r.person, {"rano": [], "popołudnie": [], "wieczór": [], "unspecified": []})[label].append(r.dict())
+        else:
+            for t in times:
+                label = PERIOD_MAP.get(str(t))
+                if label:
+                    schedule.setdefault(r.person, {"rano": [], "popołudnie": [], "wieczór": [], "unspecified": []})[label].append(r.dict())
+                else:
+                    schedule.setdefault(r.person, {"rano": [], "popołudnie": [], "wieczór": [], "unspecified": []})["unspecified"].append(r.dict())
+
+    return {"date": now.strftime("%Y-%m-%d"), "schedule": schedule}

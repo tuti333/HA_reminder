@@ -77,4 +77,33 @@ async function load() {
   });
 }
 
+async function loadSchedule() {
+  const res = await fetch("api/today");
+  if (!res.ok) return;
+  const payload = await res.json();
+  const schedule = payload.schedule || {};
+
+  // for each person and period, fill the corresponding container
+  Object.keys(schedule).forEach(person => {
+    const periods = schedule[person];
+    Object.keys(periods).forEach(period => {
+      // match element id like 'Magda-rano' or 'Mateusz-wieczór'
+      const el = document.getElementById(`${person}-${period}`);
+      if (!el) return;
+      let ul = el.querySelector('ul');
+      if (!ul) {
+        ul = document.createElement('ul');
+        el.appendChild(ul);
+      }
+      ul.innerHTML = '';
+      periods[period].forEach(r => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${r.name}</strong> (${r.dose})`;
+        ul.appendChild(li);
+      });
+    });
+  });
+}
+
 load();
+loadSchedule();
