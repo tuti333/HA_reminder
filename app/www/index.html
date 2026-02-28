@@ -15,9 +15,32 @@
 
     /* normal styles */
     button { margin-left: 6px; }
-    table, th, td {
-      border:1px solid black;
+    table {
       border-collapse: collapse;
+      width: 50%;
+    }
+    th, td {
+      border:1px solid black;
+      padding: 6px 8px;
+    }
+    /* center the period header rows */
+    tbody td[colspan="2"] {
+      text-align: center;
+    }
+    /* modernize reminder lists: remove bullets, flex layout */
+    .reminders {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .reminders li {
+      background: #f8f9fa;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.95rem;
     }
 
     /* optional: if you later want true dark-mode styling, use this media query */

@@ -105,9 +105,10 @@ async function loadSchedule() {
 
       if (periods[period].length > 0) {
         const ul = document.createElement('ul');
+        ul.className = 'reminders';
         periods[period].forEach(r => {
           const li = document.createElement('li');
-          li.innerHTML = `<strong>${r.name}</strong> (${r.dose})`;
+          li.innerHTML = `<strong>${r.name}</strong> (${r.dose}szt)`;
           ul.appendChild(li);
         });
         el.appendChild(ul);
