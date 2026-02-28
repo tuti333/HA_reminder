@@ -75,6 +75,16 @@ async function load() {
     li.appendChild(del);
     list.appendChild(li);
   });
+  // refresh schedule display as well
+  loadSchedule();
+}
+
+// helpers for user actions (currently just log, can be extended)
+function markAllTaken(person, period) {
+  console.log(`mark all taken for ${person} ${period}`);
+}
+function skipAll(person, period) {
+  console.log(`skip all for ${person} ${period}`);
 }
 
 async function loadSchedule() {
@@ -90,17 +100,30 @@ async function loadSchedule() {
       // match element id like 'Magda-rano' or 'Mateusz-wieczór'
       const el = document.getElementById(`${person}-${period}`);
       if (!el) return;
-      let ul = el.querySelector('ul');
-      if (!ul) {
-        ul = document.createElement('ul');
+      // clear out old content
+      el.innerHTML = '';
+
+      if (periods[period].length > 0) {
+        const ul = document.createElement('ul');
+        periods[period].forEach(r => {
+          const li = document.createElement('li');
+          li.innerHTML = `<strong>${r.name}</strong> (${r.dose})`;
+          ul.appendChild(li);
+        });
         el.appendChild(ul);
+
+        const actionDiv = document.createElement('div');
+        actionDiv.className = 'actions';
+        const taken = document.createElement('button');
+        taken.textContent = 'Wzięte';
+        taken.onclick = () => markAllTaken(person, period);
+        const skipped = document.createElement('button');
+        skipped.textContent = 'Pominięte';
+        skipped.onclick = () => skipAll(person, period);
+        actionDiv.appendChild(taken);
+        actionDiv.appendChild(skipped);
+        el.appendChild(actionDiv);
       }
-      ul.innerHTML = '';
-      periods[period].forEach(r => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${r.name}</strong> (${r.dose})`;
-        ul.appendChild(li);
-      });
     });
   });
 }
